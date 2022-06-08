@@ -5,6 +5,8 @@
 #include "entity.h"
 #include "componentMask.h"
 
+class World;
+
 class System 
 {
 public:
@@ -24,6 +26,8 @@ public:
 
     virtual void render() {};
 
+    void registerWorld(World * world);
+
     void registerEntity(Entity const & entity);
 
     void unRegisterEntity(Entity const & entity);
@@ -32,6 +36,7 @@ public:
 
 protected:
     std::vector<Entity> registeredEntities;
+    World * parentWorld;
     ComponentMask signature;
 };
 #endif

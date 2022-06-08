@@ -1,6 +1,6 @@
 #ifndef MINI_ENGINE_ENTITY_MANAGER_H
 #define MINI_ENGINE_ENTITY_MANAGER_H
-#include "entity.h";
+#include "entity.h"
 
 class EntityManager {
 public:

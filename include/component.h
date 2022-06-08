@@ -21,6 +21,6 @@ struct Component
 template <typename C>
 static int GetComponentFamily()
 {
-    return Comnent<typename std::remove_const<C>::type>::family();
+    return Component<typename std::remove_const<C>::type>::family();
 }
 #endif

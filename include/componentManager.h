@@ -33,11 +33,11 @@ public:
         componentData.data = static_cast<std::array<ComponentType, MAX_NUMBER_OF_COMPONENTS> *>(malloc(sizeof(ComponentType) * MAX_NUMBER_OF_COMPONENTS));
     }
 
-    ComponentInstance addComponent(Entity e, ComponnetType c)
+    ComponentInstance addComponent(Entity e, ComponentType c)
     {
         ComponentInstance newInstance = componentData.size++;
         componentData.data->at(newInstance) = c;
-        entityMap.add(e, c);
+        entityMap.add(e, newInstance);
         return newInstance;
     }
 
@@ -51,7 +51,7 @@ public:
         Entity lastEntity = entityMap.getEntity(lastInstance);
 
         entityMap.remove(e);
-        entityMap.update(lastEntity ,instance);
+        entityMap.update(lastEntity, instance);
 
         componentData.size --;
     }

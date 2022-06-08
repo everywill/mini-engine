@@ -2,7 +2,7 @@
 
 Entity EntityManager::createEntity()
 {
-    return {lastEntity++};
+    return {lastEntityId++};
 }
 
-void EntiryManager::destroyEntity(Entity e) {}
+void EntityManager::destroyEntity(Entity e) {}

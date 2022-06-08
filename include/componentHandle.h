@@ -11,7 +11,7 @@ struct ComponentHandle
 
     Entity owner;
     ExposedComponentType * component;
-    ComponentManager<ComponentType> manager;
+    ComponentManager<ComponentType> *manager;
 
     ComponentHandle() {};
     ComponentHandle(Entity owner, ExposedComponentType *component, ComponentManager<ComponentType> * manager)

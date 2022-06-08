@@ -1,13 +1,15 @@
 #ifndef MINI_ENGINE_WORLD_H
 #define MINI_ENGINE_WORLD_H
 
+#include <iostream>
 #include <memory>
 #include "entityManager.h"
-#include "entityHandle.h"
 #include "system.h"
 #include "componentManager.h"
 #include "componentMask.h"
 #include "componentHandle.h"
+
+struct EntityHandle;
 
 class World 
 {
@@ -52,8 +54,8 @@ public:
     template <typename ComponentType, typename... Args>
     void unpack(Entity e, ComponentHandle<ComponentType> & handle, ComponentHandle<Args> & ...args)
     {
-        auto mgr = getComponentManager<ComponentType>();
-        handle = ComponentHandle(e, mgr->loolup(e), mgr);
+        ComponentManager<ComponentType> * mgr = getComponentManager<ComponentType>();
+        handle = ComponentHandle<ComponentType>(e, mgr->lookup(e), mgr);
 
         // recurse
         unpack<Args...>(e, args...);
@@ -61,9 +63,9 @@ public:
 
     template <typename ComponentType>
     void unpack(Entity e, ComponentHandle<ComponentType> & handle)
-    {
+    {   
         auto mgr = getComponentManager<ComponentType>();
-        handle = ComponentHandle(e, mgr->loolup(e), mgr);
+        handle = ComponentHandle<ComponentType>(e, mgr->lookup(e), mgr);
     }
 
 private:
@@ -83,7 +85,7 @@ private:
         }
 
         if(!componentManagers[family])
-        {
+        {   
             componentManagers[family] = std::make_unique<ComponentManager<ComponentType>>();
         }
 

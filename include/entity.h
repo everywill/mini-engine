@@ -4,9 +4,13 @@ struct Entity
 {
     int id;
 
-    bool operator<(const Entity& e2)
+    // bool operator<(const Entity& e2)
+    // {
+    //     return id < e2.id;
+    // }
+    friend bool operator<(const Entity & e1, const Entity & e2)
     {
-        return id < e2.id;
+        return e1.id < e2.id;
     }
 };
 

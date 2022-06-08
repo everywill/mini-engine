@@ -1,4 +1,5 @@
 #include "world.h"
+#include "entityHandle.h"
 
 World::World(std::unique_ptr<EntityManager> entityManager): entityManager(std::move(entityManager)) {}
 
@@ -40,22 +41,10 @@ void World::render()
     }
 }
 
-EntityHandle World::createEntity()
-{
-    return { entityManager->createEntity(), this };
-}
-
-void World::destroyEntity(Entity entity)
-{
-    for(auto & system : systems)
-    {
-        system.unRegisterEntity(entity);
-    }
-}
-
 void World::addSystem(std::unique_ptr<System> system)
-{
-    systems.push_back(system);
+{   
+    system->registerWorld(this);
+    systems.push_back(std::move(system));
 }
 
 void World::updateEntityMask(Entity const & entity, ComponentMask oldMask)

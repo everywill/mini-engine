@@ -1,5 +1,10 @@
 #include "system.h"
 
+void System::registerWorld(World * world)
+{
+    parentWorld = world;
+}
+
 void System::registerEntity(Entity const & entity)
 {
     registeredEntities.push_back(entity);
